@@ -80,6 +80,7 @@ if($lock_status){
 - [get_dns_records()](#get_dns_records): returns an array of dns records
 - [delete_dns_record()](#delete_dns_record)
 - [is_domain_available()](#is_domain_available)
+- [is_transfer_available()](#is_transfer_available)
 - [send_auth_code()](#send_auth_code): Have the EPP transfer code for the domain emailed to the administrative contact.
 - [get_contact_by_id()](#get_contact_by_id)
 - [list_domains()](#list_domains)
@@ -301,6 +302,27 @@ try{
         echo 'pleas check your domain';
     }elseif($result == 'unavailable'){
         echo 'domain is not available';
+    }else{
+        echo 'failed';
+    }
+}catch(Exception $e){
+    echo $e->getMessage();
+}
+```
+
+<a name="is_transfer_available"/>
+
+### is_transfer_available()
+
+> possible return values: 'available', 'unavailable' and false.
+
+```php
+try{
+    $result = $ns->is_transfer_available($domain);
+    if($result == 'available'){
+        echo 'transfer is available';
+    }elseif($result == 'unavailable'){
+        echo 'transfer is not available';
     }else{
         echo 'failed';
     }
