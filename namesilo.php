@@ -143,6 +143,14 @@ class Namesilo{
             return 'unavailable';
         return false;
     }
+    public function is_transfer_available($domain){
+        $result = $this->request('checkTransferAvailability',[['domains',$domain]]);
+        if($this->request_successp($result) && isset($result['reply']['available']))
+            return 'available';
+        if($this->request_successp($result) && isset($result['reply']['unavailable']))
+            return 'unavailable';
+        return false;
+    }
     public function send_auth_code($domain){
         return $this->request_successp($this->request('retrieveAuthCode',[['domain',$domain]]));
     }
